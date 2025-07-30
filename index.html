@@ -662,3 +662,1360 @@
     <script src="js/load_all_demo_data.js"></script>
 </body>
 </html>
+
+/* خطوط وألوان */
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+:root {
+  --primary-color: #007a33; /* أخضر كرة القدم */
+  --secondary-color: #e31c24; /* أحمر */
+  --background-color: #f4f6f7;
+  --text-color: #333;
+  --light-color: #fff;
+  --font-family: 'Cairo', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  color: var(--primary-color);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* الترويسة */
+header {
+  background: var(--primary-color);
+  color: var(--light-color);
+  padding: 1rem 0;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.4rem;
+  user-select: none;
+}
+
+header nav button {
+  background: transparent;
+  border: none;
+  color: var(--light-color);
+  font-weight: 600;
+  margin-left: 0.7rem;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+header nav button:hover,
+header nav button:focus {
+  background: var(--secondary-color);
+  outline: none;
+}
+
+/* الصفحات والأقسام */
+.page {
+  display: none;
+  padding: 2rem 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dashboard-section {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* تسميات الحقول */
+label {
+  display: block;
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+/* الحقول النصية وأنواع الإدخال */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+select,
+input[type="time"] {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  border: 1.8px solid var(--primary-color);
+  border-radius: 5px;
+  font-family: var(--font-family);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+select:focus,
+input[type="time"]:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 6px rgba(227, 28, 36, 0.5); /* Semi-transparent secondary color */
+}
+
+/* الأزرار */
+button,
+.btn-logout {
+  background: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  cursor: pointer;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover,
+button:focus,
+.btn-logout:hover,
+.btn-logout:focus {
+  background: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 8px rgba(227, 28, 36, 0.5); /* Semi-transparent secondary color */
+}
+
+/* جدول اللاعبين والجدول الزمني */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.94rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+th, td {
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  background-color: #d5f1df;
+  cursor: pointer;
+}
+
+.btn-remove-schedule {
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.2rem; /* Make clickable area larger */
+}
+
+.btn-remove-schedule:hover,
+.btn-remove-schedule:focus {
+  color: #9c0013;
+  outline: none;
+}
+
+/* أزرار اختيار الفلسفة التدريبية */
+.philosophy-buttons button {
+  margin: 0.3rem 0.4rem 0.8rem 0.4rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  background: white;
+  color: var(--primary-color); /* Default color */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  user-select: none;
+}
+
+.philosophy-buttons button[aria-pressed="true"] {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 10px rgba(227, 28, 36, 0.5);
+}
+
+.philosophy-buttons button:hover,
+.philosophy-buttons button:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+}
+
+/* تعليقات التعليمات ورسائل التنبيه */
+.instructions {
+  background-color: #eef6f5;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  font-style: italic;
+  margin-top: 0.5rem;
+  color: #555;
+  user-select: none;
+}
+
+.form-message {
+  margin-top: 0.8rem;
+  font-weight: 700;
+  color: #b42a2a;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+/* نصوص مخرجات البرنامج التدريبي */
+.program-output {
+  background: #f0fff4;
+  border: 1.5px solid var(--primary-color);
+  border-radius: 6px;
+  white-space: pre-wrap;
+  padding: 1rem;
+  max-height: 240px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  direction: ltr; /* Ensure code/program output is LTR */
+  text-align: left; /* Ensure code/program output is left-aligned */
+}
+
+/* حوار (Dialog) نماذج الإدخال */
+dialog {
+  border: none;
+  border-radius: 8px;
+  width: 90vw;
+  max-width: 500px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-family);
+  position: fixed; /* Ensure it stays in place */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Ensure it's on top */
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog form > fieldset {
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
+dialog form > fieldset legend {
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0 0.25rem;
+  color: var(--primary-color);
+}
+
+dialog menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+dialog menu button {
+  margin-top: 0; /* Override default button margin */
+}
+
+/* ضبط اتجاه الأرقام في حقول الإدخال */
+input[type="number"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Custom Message/Confirm Dialogs */
+#app-message-dialog,
+#app-confirm-dialog {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+#app-message-dialog p,
+#app-confirm-dialog p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+#app-confirm-dialog menu {
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  margin-top: auto; /* Pushes footer to the bottom */
+  padding: 1rem 0;
+  background: var(--primary-color);
+  color: var(--light-color);
+  text-align: center;
+  font-size: 0.9rem;
+  box-shadow: 0 -3px 6px rgba(0,0,0,0.2);
+}
+
+/* استجابة التصميم */
+@media (max-width: 600px) {
+  th, td, label, button {
+    font-size: 0.85rem;
+  }
+  .dashboard-section {
+    padding: 0.8rem 1rem;
+  }
+  header nav button {
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+  }
+  .logo {
+    font-size: 1.2rem;
+  }
+  .philosophy-buttons button {
+    min-width: 90px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+    margin: 0.2rem;
+  }
+  dialog {
+    padding: 1rem;
+  }
+  dialog menu {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  dialog menu button {
+    width: 100%;
+  }
+  .program-output {
+    font-size: 0.8rem;
+  }
+}
+
+"use strict";
+
+/* ----------------- بيانات افتراضية للغة العربية والفرنسية والإنجليزية ----------------- */
+const i18n = {
+  ar: {
+    login_title: "تسجيل الدخول / إنشاء حساب",
+    login_desc: "برجاء إدخال اسم المستخدم وكلمة المرور",
+    label_username: "اسم المستخدم",
+    label_password: "كلمة المرور",
+    btn_login: "تسجيل الدخول",
+    btn_create_account: "إنشاء حساب جديد",
+    btn_back_login: "العودة لتسجيل الدخول",
+    signup_title: "إنشاء حساب مدرب جديد",
+    dashboard_title: "لوحة تحكم المدرب: ",
+    btn_logout: "تسجيل خروج",
+    coach_profile_title: "ملف المدرب",
+    label_name: "الاسم",
+    label_age: "العمر",
+    label_nationality: "الجنسية",
+    label_phone: "رقم الهاتف",
+    label_level: "المستوى التدريبي",
+    btn_save: "حفظ التعديلات",
+    age_group_title: "اختيار الفئة العمرية للفريق",
+    age_u15: "أقل من 15",
+    age_u17: "أقل من 17",
+    age_u19: "أقل من 19",
+    age_female: "الفريق النسائي",
+    age_adult: "الأكابر",
+    players_title: "إدارة اللاعبين وتقييم المهارات",
+    btn_add_player: "إضافة لاعب جديد",
+    players_table_caption: "قائمة اللاعبين",
+    col_name: "الاسم",
+    col_technical: "فنية",
+    col_physical: "بدنية",
+    col_tactical: "تكتيكية",
+    col_mental: "ذهنية",
+    col_actions: "إجراءات",
+    player_form_title: "نموذج بيانات اللاعب",
+    label_player_name: "اسم اللاعب",
+    legend_technical_skills: "المهارات الفنية (1-20)",
+    label_passing: "التمرير",
+    label_receiving: "الاستقبال",
+    label_dribbling: "المراوغة",
+    label_heading: "الضرب بالرأس",
+    label_shooting: "التسديد",
+    legend_physical_abilities: "الخصائص البدنية (1-20)",
+    label_stamina: "التحمل",
+    label_speed: "السرعة",
+    label_strength: "القوة البدنية",
+    label_agility: "التوازن والرشاقة",
+    legend_tactical_understanding: "الخصائص التكتيكية (1-20)",
+    label_game_intelligence: "ذكاء اللعب",
+    label_positioning: "التمركز الصحيح",
+    label_teamwork: "التنظيم والضغط الجماعي",
+    legend_mental_psychological: "الخصائص الذهنية والنفسية (1-20)",
+    label_mental_toughness: "الصلابة الذهنية",
+    label_self_confidence: "الثقة بالنفس",
+    label_motivation: "الحافز والرغبة في الفوز",
+    btn_cancel: "إلغاء",
+    team_analysis_title: "تحليل الفريق",
+    team_strengths_title: "نقاط القوة في الفريق:",
+    team_weaknesses_title: "نقاط الضعف في الفريق:",
+    training_philosophy_title: "اختيار الفلسفة التدريبية",
+    philosophy_offensive: "اللعب الهجومي",
+    philosophy_defensive: "اللعب الدفاعي",
+    philosophy_possession: "الاستحواذ على الكرة",
+    philosophy_high_press: "الضغط العالي",
+    philosophy_direct: "اللعب المباشر",
+    schedule_title: "جدولة التدريبات والمباريات",
+    schedule_table_caption: "جدول التدريبات والمباريات الأسبوعي",
+    col_day: "اليوم",
+    col_training_time: "وقت التدريب",
+    col_match_time: "وقت المباراة",
+    day_sat: "السبت",
+    day_sun: "الأحد",
+    day_mon: "الاثنين",
+    day_tue: "الثلاثاء",
+    day_wed: "الأربعاء",
+    day_thu: "الخميس",
+    day_fri: "الجمعة",
+    btn_save_schedule: "حفظ الجدول",
+    programs_title: "إنشاء البرامج التدريبية",
+    btn_annual_program: "إنشاء البرنامج السنوي تلقائياً",
+    btn_download_pdf: "تحميل البرنامج بصيغة PDF",
+    player_name_required: "اسم اللاعب مطلوب.",
+    skill_value_invalid: "يرجى ملء جميع المهارات بقيم بين 1 و 20.",
+    confirm_delete_player: "هل تريد حذف اللاعب ",
+    select_philosophy_first: "الرجاء اختيار الفلسفة التدريبية أولاً.",
+    profile_saved: "تم حفظ التعديلات.",
+    schedule_saved: "تم حفظ جدول التدريبات والمباريات.",
+    no_strengths: "لا توجد نقاط قوة بارزة حالياً.",
+    no_weaknesses: "لا توجد نقاط ضعف بارزة حالياً.",
+    day_data_cleared: "تم مسح بيانات اليوم.",
+    ok_button: "موافق",
+    yes_button: "نعم",
+    no_button: "لا"
+  },
+  fr: {
+    login_title: "Connexion / Créer un compte",
+    login_desc: "Veuillez saisir votre nom d'utilisateur et mot de passe",
+    label_username: "Nom d'utilisateur",
+    label_password: "Mot de passe",
+    btn_login: "Connexion",
+    btn_create_account: "Créer un compte",
+    btn_back_login: "Retour à la connexion",
+    signup_title: "Créer un nouveau compte d'entraîneur",
+    dashboard_title: "Tableau de bord de l'entraîneur: ",
+    btn_logout: "Déconnexion",
+    coach_profile_title: "Profil de l'entraîneur",
+    label_name: "Nom",
+    label_age: "Âge",
+    label_nationality: "Nationalité",
+    label_phone: "Téléphone",
+    label_level: "Niveau d'entraînement",
+    btn_save: "Enregistrer",
+    age_group_title: "Choisir la catégorie d'âge de l'équipe",
+    age_u15: "Moins de 15 ans",
+    age_u17: "Moins de 17 ans",
+    age_u19: "Moins de 19 ans",
+    age_female: "Équipe féminine",
+    age_adult: "Adultes",
+    players_title: "Gestion et évaluation des joueurs",
+    btn_add_player: "Ajouter un nouveau joueur",
+    players_table_caption: "Liste des joueurs",
+    col_name: "Nom",
+    col_technical: "Technique",
+    col_physical: "Physique",
+    col_tactical: "Tactique",
+    col_mental: "Mental",
+    col_actions: "Actions",
+    player_form_title: "Formulaire du joueur",
+    label_player_name: "Nom du joueur",
+    legend_technical_skills: "Compétences techniques (1-20)",
+    label_passing: "Passe",
+    label_receiving: "Réception",
+    label_dribbling: "Dribble",
+    label_heading: "Tête",
+    label_shooting: "Tir",
+    legend_physical_abilities: "Capacités physiques (1-20)",
+    label_stamina: "Endurance",
+    label_speed: "Vitesse",
+    label_strength: "Force physique",
+    label_agility: "Équilibre et agilité",
+    legend_tactical_understanding: "Compréhension tactique (1-20)",
+    label_game_intelligence: "Intelligence de jeu",
+    label_positioning: "Positionnement",
+    label_teamwork: "Travail d'équipe et pressing",
+    legend_mental_psychological: "Traits mentaux et psychologiques (1-20)",
+    label_mental_toughness: "Robustesse mentale",
+    label_self_confidence: "Confiance en soi",
+    label_motivation: "Motivation et compétitivité",
+    btn_cancel: "Annuler",
+    team_analysis_title: "Analyse de l'équipe",
+    team_strengths_title: "Points forts de l'équipe:",
+    team_weaknesses_title: "Points faibles de l'équipe:",
+    training_philosophy_title: "Choisir la philosophie d'entraînement",
+    philosophy_offensive: "Jeu offensif",
+    philosophy_defensive: "Jeu défensif",
+    philosophy_possession: "Possession du ballon",
+    philosophy_high_press: "Pressing haut",
+    philosophy_direct: "Jeu direct",
+    schedule_title: "Planification des entraînements et matchs",
+    schedule_table_caption: "Planning hebdomadaire d'entraînements et matchs",
+    col_day: "Jour",
+    col_training_time: "Heure entraînement",
+    col_match_time: "Heure match",
+    day_sat: "Samedi",
+    day_sun: "Dimanche",
+    day_mon: "Lundi",
+    day_tue: "Mardi",
+    day_wed: "Mercredi",
+    day_thu: "Jeudi",
+    day_fri: "Vendredi",
+    btn_save_schedule: "Enregistrer le planning",
+    programs_title: "Création des programmes d'entraînement",
+    btn_annual_program: "Créer programme annuel automatiquement",
+    btn_download_pdf: "Télécharger PDF",
+    player_name_required: "Le nom du joueur est requis.",
+    skill_value_invalid: "Veuillez remplir toutes les compétences avec des valeurs de 1 à 20.",
+    confirm_delete_player: "Voulez-vous supprimer le joueur ",
+    select_philosophy_first: "Veuillez d'abord sélectionner la philosophie d'entraînement.",
+    profile_saved: "Profil enregistré.",
+    schedule_saved: "Planning enregistré.",
+    no_strengths: "Aucune force importante actuellement.",
+    no_weaknesses: "Aucune faiblesse importante actuellement.",
+    day_data_cleared: "Journée effacée.",
+    ok_button: "OK",
+    yes_button: "Oui",
+    no_button: "Non"
+  },
+  en: {
+    login_title: "Login / Sign Up",
+    login_desc: "Please enter your username and password",
+    label_username: "Username",
+    label_password: "Password",
+    btn_login: "Login",
+    btn_create_account: "Create Account",
+    btn_back_login: "Back to Login",
+    signup_title: "Create New Coach Account",
+    dashboard_title: "Coach Dashboard: ",
+    btn_logout: "Logout",
+    coach_profile_title: "Coach Profile",
+    label_name: "Name",
+    label_age: "Age",
+    label_nationality: "Nationality",
+    label_phone: "Phone Number",
+    label_level: "Coaching Level",
+    btn_save: "Save Changes",
+    age_group_title: "Select Team Age Group",
+    age_u15: "Under 15",
+    age_u17: "Under 17",
+    age_u19: "Under 19",
+    age_female: "Women's Team",
+    age_adult: "Adults",
+    players_title: "Manage Players & Skills",
+    btn_add_player: "Add New Player",
+    players_table_caption: "Players List",
+    col_name: "Name",
+    col_technical: "Technical",
+    col_physical: "Physical",
+    col_tactical: "Tactical",
+    col_mental: "Mental",
+    col_actions: "Actions",
+    player_form_title: "Player Data Form",
+    label_player_name: "Player Name",
+    legend_technical_skills: "Technical Skills (1-20)",
+    label_passing: "Passing",
+    label_receiving: "Receiving",
+    label_dribbling: "Dribbling",
+    label_heading: "Heading",
+    label_shooting: "Shooting",
+    legend_physical_abilities: "Physical Abilities (1-20)",
+    label_stamina: "Stamina",
+    label_speed: "Speed",
+    label_strength: "Physical Strength",
+    label_agility: "Balance & Agility",
+    legend_tactical_understanding: "Tactical Understanding (1-20)",
+    label_game_intelligence: "Game Intelligence",
+    label_positioning: "Positioning",
+    label_teamwork: "Teamwork & Pressing",
+    legend_mental_psychological: "Mental & Psychological Traits (1-20)",
+    label_mental_toughness: "Mental Toughness",
+    label_self_confidence: "Self-confidence",
+    label_motivation: "Motivation & Competitiveness",
+    btn_cancel: "Cancel",
+    team_analysis_title: "Team Analysis",
+    team_strengths_title: "Team Strengths:",
+    team_weaknesses_title: "Team Weaknesses:",
+    training_philosophy_title: "Select Training Philosophy",
+    philosophy_offensive: "Offensive Play",
+    philosophy_defensive: "Defensive Play",
+    philosophy_possession: "Ball Possession",
+    philosophy_high_press: "High Press",
+    philosophy_direct: "Direct Play",
+    schedule_title: "Training and Match Scheduling",
+    schedule_table_caption: "Weekly Training and Matches Schedule",
+    col_day: "Day",
+    col_training_time: "Training Time",
+    col_match_time: "Match Time",
+    day_sat: "Saturday",
+    day_sun: "Sunday",
+    day_mon: "Monday",
+    day_tue: "Tuesday",
+    day_wed: "Wednesday",
+    day_thu: "Thursday",
+    day_fri: "Friday",
+    btn_save_schedule: "Save Schedule",
+    programs_title: "Create Training Programs",
+    btn_annual_program: "Auto-create Annual Program",
+    btn_download_pdf: "Download Program PDF",
+    player_name_required: "Player Name is required.",
+    skill_value_invalid: "Please fill all skills with values from 1 to 20.",
+    confirm_delete_player: "Do you want to delete player ",
+    select_philosophy_first: "Please select a training philosophy first.",
+    profile_saved: "Profile saved.",
+    schedule_saved: "Schedule saved.",
+    no_strengths: "No significant strengths currently.",
+    no_weaknesses: "No significant weaknesses currently.",
+    day_data_cleared: "Day data cleared.",
+    ok_button: "OK",
+    yes_button: "Yes",
+    no_button: "No"
+  }
+};
+
+/* ------------------ البيانات الافتراضية لاختبار التطبيق - 18 لاعب ------------------ */
+// Expanded to 18 players for more meaningful chart data
+const defaultPlayers = [
+  { id: 1, name: "أحمد محمد", skills: { passing: 15, receiving: 14, dribbling: 16, heading: 13, shooting: 15, stamina: 17, speed: 16, strength: 14, agility: 15, gameIntel: 14, positioning: 13, teamwork: 16, mentalTough: 13, confidence: 16, motivation: 15 } },
+  { id: 2, name: "محمد علي", skills: { passing: 14, receiving: 13, dribbling: 14, heading: 15, shooting: 13, stamina: 14, speed: 15, strength: 13, agility: 14, gameIntel: 15, positioning: 14, teamwork: 14, mentalTough: 16, confidence: 15, motivation: 15 } },
+  { id: 3, name: "خالد حسن", skills: { passing: 16, receiving: 15, dribbling: 15, heading: 16, shooting: 17, stamina: 18, speed: 17, strength: 16, agility: 15, gameIntel: 14, positioning: 15, teamwork: 15, mentalTough: 14, confidence: 15, motivation: 16 } },
+  { id: 4, name: "يوسف ابراهيم", skills: { passing: 12, receiving: 11, dribbling: 13, heading: 10, shooting: 12, stamina: 13, speed: 12, strength: 11, agility: 13, gameIntel: 12, positioning: 11, teamwork: 13, mentalTough: 12, confidence: 11, motivation: 12 } },
+  { id: 5, name: "علياء سعيد", skills: { passing: 17, receiving: 16, dribbling: 18, heading: 14, shooting: 16, stamina: 15, speed: 17, strength: 13, agility: 16, gameIntel: 16, positioning: 15, teamwork: 17, mentalTough: 15, confidence: 17, motivation: 18 } },
+  { id: 6, name: "فاطمة أحمد", skills: { passing: 13, receiving: 12, dribbling: 14, heading: 11, shooting: 14, stamina: 14, speed: 13, strength: 12, agility: 14, gameIntel: 13, positioning: 12, teamwork: 15, mentalTough: 13, confidence: 14, motivation: 13 } },
+  { id: 7, name: "نور الدين", skills: { passing: 18, receiving: 17, dribbling: 17, heading: 16, shooting: 18, stamina: 17, speed: 18, strength: 16, agility: 17, gameIntel: 17, positioning: 18, teamwork: 16, mentalTough: 17, confidence: 18, motivation: 17 } },
+  { id: 8, name: "ليلى محمود", skills: { passing: 11, receiving: 10, dribbling: 12, heading: 9, shooting: 11, stamina: 12, speed: 11, strength: 10, agility: 11, gameIntel: 10, positioning: 9, teamwork: 11, mentalTough: 11, confidence: 10, motivation: 11 } },
+  { id: 9, name: "سامي يوسف", skills: { passing: 16, receiving: 15, dribbling: 16, heading: 15, shooting: 15, stamina: 16, speed: 15, strength: 15, agility: 16, gameIntel: 15, positioning: 16, teamwork: 15, mentalTough: 16, confidence: 15, motivation: 16 } },
+  { id: 10, name: "عمر فاروق", skills: { passing: 14, receiving: 13, dribbling: 15, heading: 12, shooting: 14, stamina: 15, speed: 14, strength: 13, agility: 15, gameIntel: 13, positioning: 14, teamwork: 13, mentalTough: 14, confidence: 13, motivation: 14 } },
+  { id: 11, name: "دينا كمال", skills: { passing: 17, receiving: 18, dribbling: 16, heading: 15, shooting: 17, stamina: 16, speed: 17, strength: 14, agility: 18, gameIntel: 16, positioning: 17, teamwork: 18, mentalTough: 15, confidence: 16, motivation: 17 } },
+  { id: 12, name: "أنس إبراهيم", skills: { passing: 10, receiving: 9, dribbling: 11, heading: 8, shooting: 10, stamina: 11, speed: 10, strength: 9, agility: 10, gameIntel: 9, positioning: 8, teamwork: 10, mentalTough: 10, confidence: 9, motivation: 10 } },
+  { id: 13, name: "زينب قاسم", skills: { passing: 15, receiving: 14, dribbling: 15, heading: 13, shooting: 14, stamina: 16, speed: 15, strength: 14, agility: 15, gameIntel: 14, positioning: 13, teamwork: 16, mentalTough: 13, confidence: 15, motivation: 14 } },
+  { id: 14, name: "يحيى رشيد", skills: { passing: 16, receiving: 17, dribbling: 15, heading: 14, shooting: 16, stamina: 17, speed: 16, strength: 15, agility: 16, gameIntel: 15, positioning: 14, teamwork: 17, mentalTough: 14, confidence: 16, motivation: 17 } },
+  { id: 15, name: "سارة حسين", skills: { passing: 13, receiving: 12, dribbling: 13, heading: 11, shooting: 13, stamina: 14, speed: 13, strength: 12, agility: 13, gameIntel: 12, positioning: 11, teamwork: 14, mentalTough: 12, confidence: 13, motivation: 12 } },
+  { id: 16, name: "فراس جمال", skills: { passing: 18, receiving: 17, dribbling: 18, heading: 16, shooting: 19, stamina: 19, speed: 18, strength: 17, agility: 18, gameIntel: 17, positioning: 16, teamwork: 18, mentalTough: 16, confidence: 19, motivation: 18 } },
+  { id: 17, name: "هدى سالم", skills: { passing: 12, receiving: 11, dribbling: 12, heading: 10, shooting: 12, stamina: 13, speed: 12, strength: 11, agility: 12, gameIntel: 11, positioning: 10, teamwork: 12, mentalTough: 11, confidence: 12, motivation: 11 } },
+  { id: 18, name: "ماجد ناصر", skills: { passing: 15, receiving: 14, dribbling: 15, heading: 14, shooting: 15, stamina: 16, speed: 15, strength: 14, agility: 15, gameIntel: 14, positioning: 13, teamwork: 15, mentalTough: 13, confidence: 15, motivation: 14 } }
+];
+
+// يتم تحرير هذه القائمة ديناميكياً
+let players = JSON.parse(JSON.stringify(defaultPlayers)); // نسخة عميقة
+
+/* --------------------- حالة التطبيق --------------------- */
+let currentLanguage = "ar";
+let currentCoach = null;
+let currentPhilosophy = "offensive"; // Set a default philosophy
+let ageGroup = "u15";
+let teamSchedule = {}; // {day: {trainingTime, matchTime}}
+
+/* --------------------- عناصر DOM لنوافذ الحوار المخصصة --------------------- */
+const appMessageDialog = document.getElementById('app-message-dialog');
+const appMessageText = document.getElementById('app-message-text');
+const appMessageOkBtn = document.getElementById('app-message-ok-btn');
+
+const appConfirmDialog = document.getElementById('app-confirm-dialog');
+const appConfirmText = document.getElementById('app-confirm-text');
+const appConfirmYesBtn = document.getElementById('app-confirm-yes-btn');
+const appConfirmNoBtn = document.getElementById('app-confirm-no-btn');
+
+/**
+ * Displays a custom alert message to the user.
+ * @param {string} message The message to display.
+ */
+function showAppMessage(message) {
+  appMessageText.textContent = message;
+  appMessageOkBtn.textContent = i18n[currentLanguage].ok_button;
+  appMessageDialog.showModal();
+}
+
+appMessageOkBtn.addEventListener('click', () => {
+  appMessageDialog.close();
+});
+
+/**
+ * Displays a custom confirmation dialog and returns a Promise.
+ * @param {string} message The confirmation message.
+ * @returns {Promise<boolean>} Resolves to true if 'Yes' is clicked, false if 'No'.
+ */
+function showAppConfirm(message) {
+  return new Promise((resolve) => {
+    appConfirmText.textContent = message;
+    appConfirmYesBtn.textContent = i18n[currentLanguage].yes_button;
+    appConfirmNoBtn.textContent = i18n[currentLanguage].no_button;
+
+    const onYesClick = () => {
+      appConfirmDialog.close();
+      resolve(true);
+      appConfirmYesBtn.removeEventListener('click', onYesClick);
+      appConfirmNoBtn.removeEventListener('click', onNoClick);
+    };
+
+    const onNoClick = () => {
+      appConfirmDialog.close();
+      resolve(false);
+      appConfirmYesBtn.removeEventListener('click', onYesClick);
+      appConfirmNoBtn.removeEventListener('click', onNoClick);
+    };
+
+    appConfirmYesBtn.addEventListener('click', onYesClick);
+    appConfirmNoBtn.addEventListener('click', onNoClick);
+
+    appConfirmDialog.showModal();
+  });
+}
+
+
+/* --------------------- تهيئة النصوص حسب اللغة --------------------- */
+function translatePage() {
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dir = (currentLanguage === "ar") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (i18n[currentLanguage] && i18n[currentLanguage][key]) {
+      el.textContent = i18n[currentLanguage][key];
+    }
+  });
+
+  // Specific handling for captions (as they are not always just textContent)
+  document.querySelectorAll("table[aria-describedby]").forEach(table => {
+    const captionId = table.getAttribute("aria-describedby");
+    const captionElement = document.getElementById(captionId);
+    const key = captionElement.getAttribute("data-i18n");
+    if (captionElement && i18n[currentLanguage] && i18n[currentLanguage][key]) {
+      captionElement.textContent = i18n[currentLanguage][key];
+    }
+  });
+
+
+  // تعليمات الفئات العمرية حسب اللغة والفئة المختارة
+  const instructionsTexts = {
+    ar: {
+      u15: "تدريب موجه للأطفال أقل من 15 سنة، التركيز على المهارات الأساسية.",
+      u17: "تطوير القدرات الفنية والبدنية للفئة بين 15 - 17 سنة.",
+      u19: "استعداد للانتقال للمستويات الاحترافية، تدريبات مكثفة.",
+      female: "برنامج خاص للفريق النسائي يراعي الخصوصيات.",
+      adult: "التدريبات احترافية وموجهة للفرق الأكاديمية والكبيرة."
+    },
+    fr: {
+      u15: "Entraînement axé sur les enfants de moins de 15 ans, concentré sur les compétences fondamentales.",
+      u17: "Développement des capacités techniques et physiques pour 15-17 ans.",
+      u19: "Préparation pour le football professionnel, entraînements intensifs.",
+      female: "Programme spécifique pour l'équipe féminine en tenant compte des particularités.",
+      adult: "Entraînements professionnels pour équipes adultes et académiques."
+    },
+    en: {
+      u15: "Training focused on children under 15 years, emphasizing basic skills.",
+      u17: "Developing technical and physical abilities for ages 15-17.",
+      u19: "Preparation for professional levels, intensive training.",
+      female: "Special program for women's team considering specifics.",
+      adult: "Professional training targeted for adult and academy teams."
+    }
+  };
+
+  const instrText = instructionsTexts[currentLanguage][ageGroup] || "";
+  document.getElementById("age-group-instructions").textContent = instrText;
+
+  // وصف الفلسفات التدريبية
+  const philosophyDesc = {
+    ar: {
+      offensive: "تركز على الهجوم المكثف والتحرك السريع نحو المرمى.",
+      defensive: "بناء الدفاع الصلب مع التركيز على مكافحة الهجمات.",
+      possession: "الاستحواذ على الكرة والسيطرة على إيقاع اللعب.",
+      "high-press": "ضغط عالي على المنافس لاستعادة الكرة بسرعة.",
+      direct: "اللعب المباشر والسريع نحو الهجوم."
+    },
+    fr: {
+      offensive: "Se concentre sur une attaque intensive et des déplacements rapides.",
+      defensive: "Construction d'une défense solide axée sur la neutralisation.",
+      possession: "Contrôle du ballon et rythme du jeu.",
+      "high-press": "Pression haute rapide pour récupérer le ballon.",
+      direct: "Jeu direct et rapide vers l'attaque."
+    },
+    en: {
+      offensive: "Focuses on intensive attacking and fast movements to goal.",
+      defensive: "Building solid defense with emphasis on countering attacks.",
+      possession: "Control of the ball and game rhythm.",
+      "high-press": "High pressing to quickly regain possession.",
+      direct: "Direct and fast play towards attacking."
+    }
+  };
+
+  if (currentPhilosophy && philosophyDesc[currentLanguage][currentPhilosophy]) {
+    document.getElementById("philosophy-description").textContent = philosophyDesc[currentLanguage][currentPhilosophy];
+  } else {
+    document.getElementById("philosophy-description").textContent = "";
+  }
+
+  // تحديث اسم المدرب
+  if (currentCoach) {
+    document.getElementById("coach-name-display").textContent = currentCoach.name || "";
+  }
+
+  // Re-render players table to update translated headers
+  renderPlayersTable();
+  updateTeamAnalysisCharts(); // Re-render charts for translated labels
+
+  // Re-translate content inside player dialog if it's open
+  if (playerDialog.open) {
+    playerForm.querySelector("h3").textContent = i18n[currentLanguage]["player_form_title"]; // Update title on open
+  }
+}
+
+/* --------------------- إدارة اللغات --------------------- */
+document.getElementById("lang-ar").addEventListener("click", () => {
+  currentLanguage = "ar";
+  translatePage();
+});
+document.getElementById("lang-fr").addEventListener("click", () => {
+  currentLanguage = "fr";
+  translatePage();
+});
+document.getElementById("lang-en").addEventListener("click", () => {
+  currentLanguage = "en";
+  translatePage();
+});
+
+/* --------------------- تسجيل دخول افتراضي --------------------- */
+// مدرب افتراضي جاهز للدخول مباشرة
+const defaultCoach = {
+  username: "defaultCoach",
+  name: "مدرب افتراضي",
+  age: 35,
+  nationality: "غير محدد",
+  phone: "0123456789",
+  level: "A"
+};
+
+/* --------------------- إجراءات الواجهة --------------------- */
+const loginSection = document.getElementById("section-login");
+const signupSection = document.getElementById("section-signup");
+const dashboardSection = document.getElementById("section-dashboard");
+
+/* --------------------- تبديل الأقسام --------------------- */
+function showSection(name) {
+  // إخفاء الكل
+  [loginSection, signupSection, dashboardSection].forEach(s => {
+    s.classList.remove("active");
+    s.hidden = true;
+  });
+  if (name === "login") {
+    loginSection.classList.add("active");
+    loginSection.hidden = false;
+  } else if (name === "signup") {
+    signupSection.classList.add("active");
+    signupSection.hidden = false;
+  } else if (name === "dashboard") {
+    dashboardSection.classList.add("active");
+    dashboardSection.hidden = false;
+    translatePage(); // Ensure full translation when showing dashboard
+    // Apply initial philosophy style
+    const defaultPhilosophyButton = document.querySelector(`[data-philosophy="${currentPhilosophy}"]`);
+    if (defaultPhilosophyButton) {
+        defaultPhilosophyButton.click(); // Simulate click to apply active styles and description
+    }
+  }
+}
+
+/* --------------------- تعبئة ملف المدرب --------------------- */
+const formCoachProfile = document.getElementById("form-coach-profile");
+function populateCoachProfile() {
+  if (!currentCoach) return;
+  document.getElementById("coach-name").value = currentCoach.name || "";
+  document.getElementById("coach-age").value = currentCoach.age || "";
+  document.getElementById("coach-nationality").value = currentCoach.nationality || "";
+  document.getElementById("coach-phone").value = currentCoach.phone || "";
+  document.getElementById("coach-level").value = currentCoach.level || "D";
+  document.getElementById("coach-name-display").textContent = currentCoach.name || "";
+}
+
+formCoachProfile.addEventListener("submit", e => {
+  e.preventDefault();
+  currentCoach.name = document.getElementById("coach-name").value.trim();
+  currentCoach.age = parseInt(document.getElementById("coach-age").value) || currentCoach.age;
+  currentCoach.nationality = document.getElementById("coach-nationality").value.trim();
+  currentCoach.phone = document.getElementById("coach-phone").value.trim();
+  currentCoach.level = document.getElementById("coach-level").value;
+  document.getElementById("profile-message").textContent = i18n[currentLanguage]["profile_saved"];
+  populateCoachProfile();
+});
+
+/* --------------------- اختيار الفئة العمرية --------------------- */
+const ageGroupSelect = document.getElementById("age-group");
+ageGroupSelect.addEventListener("change", e => {
+  ageGroup = e.target.value;
+  translatePage(); // Update instructions based on new age group
+});
+
+/* --------------------- إدارة اللاعبين --------------------- */
+const playersTableBody = document.querySelector("#players-table tbody");
+const btnAddPlayer = document.getElementById("btn-add-player");
+const playerDialog = document.getElementById("player-dialog");
+const playerForm = document.getElementById("player-form");
+const playerFormMessage = document.getElementById("player-form-message");
+
+let editingPlayerId = null;
+
+btnAddPlayer.addEventListener("click", () => {
+  showPlayerForm();
+});
+
+function showPlayerForm(player=null) {
+  editingPlayerId = player ? player.id : null;
+  playerForm.reset();
+  playerFormMessage.textContent = "";
+  if (player) {
+    document.getElementById("player-name").value = player.name;
+    document.getElementById("skill-passing").value = player.skills.passing;
+    document.getElementById("skill-receiving").value = player.skills.receiving;
+    document.getElementById("skill-dribbling").value = player.skills.dribbling;
+    document.getElementById("skill-heading").value = player.skills.heading;
+    document.getElementById("skill-shooting").value = player.skills.shooting;
+
+    document.getElementById("skill-stamina").value = player.skills.stamina;
+    document.getElementById("skill-speed").value = player.skills.speed;
+    document.getElementById("skill-strength").value = player.skills.strength;
+    document.getElementById("skill-agility").value = player.skills.agility;
+
+    document.getElementById("skill-game-intel").value = player.skills.gameIntel;
+    document.getElementById("skill-positioning").value = player.skills.positioning;
+    document.getElementById("skill-teamwork").value = player.skills.teamwork;
+
+    document.getElementById("skill-mental-tough").value = player.skills.mentalTough;
+    document.getElementById("skill-confidence").value = player.skills.confidence;
+    document.getElementById("skill-motivation").value = player.skills.motivation;
+
+    playerForm.querySelector("h3").textContent = i18n[currentLanguage]["player_form_title"]; // Update title on open
+  } else {
+    playerForm.querySelector("h3").textContent = i18n[currentLanguage]["player_form_title"]; // Update title on open
+  }
+  playerDialog.showModal();
+}
+
+playerForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("player-name").value.trim();
+  if (!name) {
+    playerFormMessage.textContent = i18n[currentLanguage]["player_name_required"];
+    return;
+  }
+  const skills = {
+    passing: validateSkill("skill-passing"),
+    receiving: validateSkill("skill-receiving"),
+    dribbling: validateSkill("skill-dribbling"),
+    heading: validateSkill("skill-heading"),
+    shooting: validateSkill("skill-shooting"),
+
+    stamina: validateSkill("skill-stamina"),
+    speed: validateSkill("skill-speed"),
+    strength: validateSkill("skill-strength"),
+    agility: validateSkill("skill-agility"),
+
+    gameIntel: validateSkill("skill-game-intel"),
+    positioning: validateSkill("skill-positioning"),
+    teamwork: validateSkill("skill-teamwork"),
+
+    mentalTough: validateSkill("skill-mental-tough"),
+    confidence: validateSkill("skill-confidence"),
+    motivation: validateSkill("skill-motivation")
+  };
+
+  if (Object.values(skills).some(v => v === null)) {
+    playerFormMessage.textContent = i18n[currentLanguage]["skill_value_invalid"];
+    return;
+  }
+
+  if(editingPlayerId){
+    const playerIndex = players.findIndex(p => p.id === editingPlayerId);
+    if(playerIndex > -1){
+      players[playerIndex].name = name;
+      players[playerIndex].skills = skills;
+    }
+  } else {
+    // Corrected new ID generation to be more robust
+    let newId;
+    if (players.length > 0) {
+        const maxId = Math.max(...players.map(p => p.id));
+        newId = maxId + 1;
+    } else {
+        newId = 1;
+    }
+    players.push({id: newId, name, skills});
+  }
+
+  playerDialog.close();
+  renderPlayersTable();
+  updateTeamAnalysisCharts();
+});
+
+document.getElementById("player-cancel-btn").addEventListener("click", () => {
+  playerDialog.close();
+});
+
+function validateSkill(id){
+  const val = Number(document.getElementById(id).value);
+  if(val >=1 && val <=20) return val;
+  return null;
+}
+
+function renderPlayersTable(){
+  playersTableBody.innerHTML = "";
+  // Update table headers with current language
+  document.querySelector("#players-table thead tr").innerHTML = `
+    <th data-i18n="col_name">${i18n[currentLanguage].col_name}</th>
+    <th data-i18n="col_technical">${i18n[currentLanguage].col_technical}</th>
+    <th data-i18n="col_physical">${i18n[currentLanguage].col_physical}</th>
+    <th data-i18n="col_tactical">${i18n[currentLanguage].col_tactical}</th>
+    <th data-i18n="col_mental">${i18n[currentLanguage].col_mental}</th>
+    <th data-i18n="col_actions">${i18n[currentLanguage].col_actions}</th>
+  `;
+
+  players.forEach(player => {
+    const technicalAvg = averageTechnical(player.skills);
+    const physicalAvg = averagePhysical(player.skills);
+    const tacticalAvg = averageTactical(player.skills);
+    const mentalAvg = averageMental(player.skills);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${player.name}</td>
+      <td>${technicalAvg.toFixed(1)}</td>
+      <td>${physicalAvg.toFixed(1)}</td>
+      <td>${tacticalAvg.toFixed(1)}</td>
+      <td>${mentalAvg.toFixed(1)}</td>
+      <td>
+        <button aria-label="${i18n[currentLanguage].col_actions} ${player.name}" class="edit-player-btn">✏️</button>
+        <button aria-label="${i18n[currentLanguage].col_actions} ${player.name}" class="delete-player-btn">🗑️</button>
+      </td>
+    `;
+
+    tr.querySelector(".edit-player-btn").addEventListener("click", () => {
+      showPlayerForm(player);
+    });
+    tr.querySelector(".delete-player-btn").addEventListener("click", async () => {
+      const confirmed = await showAppConfirm(`${i18n[currentLanguage].confirm_delete_player} ${player.name}?`);
+      if(confirmed){
+        players = players.filter(p => p.id !== player.id);
+        renderPlayersTable();
+        updateTeamAnalysisCharts();
+      }
+    });
+
+    playersTableBody.appendChild(tr);
+  });
+  updateTeamAnalysisCharts(); // Ensure charts are updated after rendering table
+}
+
+function averageTechnical(s){ return average([s.passing,s.receiving,s.dribbling,s.heading,s.shooting]); }
+function averagePhysical(s){ return average([s.stamina,s.speed,s.strength,s.agility]); }
+function averageTactical(s){ return average([s.gameIntel,s.positioning,s.teamwork]); }
+function averageMental(s){ return average([s.mentalTough,s.confidence,s.motivation]); }
+function average(arr){
+  if (arr.length === 0) return 0; // Avoid division by zero
+  return arr.reduce((a,b) => a+b,0)/arr.length;
+}
+
+/* --------------------- تحليل الفريق (Charts.js) --------------------- */
+const pieCtx = document.getElementById("team-pie-chart").getContext("2d");
+const barCtx = document.getElementById("team-bar-chart").getContext("2d");
+
+let pieChart = null;
+let barChart = null;
+
+function updateTeamAnalysisCharts(){
+  if(players.length === 0){
+    if(pieChart) pieChart.destroy();
+    if(barChart) barChart.destroy();
+    document.getElementById("team-strengths").textContent = i18n[currentLanguage]["no_strengths"];
+    document.getElementById("team-weaknesses").textContent = i18n[currentLanguage]["no_weaknesses"];
+    return;
+  }
+
+  const avgTech = average(players.map(p => averageTechnical(p.skills)));
+  const avgPhys = average(players.map(p => averagePhysical(p.skills)));
+  const avgTact = average(players.map(p => averageTactical(p.skills)));
+  const avgMent = average(players.map(p => averageMental(p.skills)));
+
+  if(pieChart) pieChart.destroy();
+  pieChart = new Chart(pieCtx, {
+    type: 'doughnut',
+    data: {
+      labels: [i18n[currentLanguage].col_technical, i18n[currentLanguage].col_physical, i18n[currentLanguage].col_tactical, i18n[currentLanguage].col_mental],
+      datasets: [{
+        label: 'Team Averages',
+        data: [avgTech.toFixed(1), avgPhys.toFixed(1), avgTact.toFixed(1), avgMent.toFixed(1)],
+        backgroundColor: ['#007a33','#1f8ef1','#f39c12','#9b59b6'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {position: 'bottom', labels: {font: {size: 14}}},
+        tooltip: {enabled: true}
+      }
+    }
+  });
+
+  const labels = players.map(p => p.name);
+  const dataTech = players.map(p => averageTechnical(p.skills).toFixed(1));
+  const dataPhys = players.map(p => averagePhysical(p.skills).toFixed(1));
+  const dataTact = players.map(p => averageTactical(p.skills).toFixed(1));
+  const dataMent = players.map(p => averageMental(p.skills).toFixed(1));
+
+  if(barChart) barChart.destroy();
+  barChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {label: i18n[currentLanguage].col_technical, data: dataTech, backgroundColor:'#007a33'},
+        {label: i18n[currentLanguage].col_physical, data: dataPhys, backgroundColor:'#1f8ef1'},
+        {label: i18n[currentLanguage].col_tactical, data: dataTact, backgroundColor:'#f39c12'},
+        {label: i18n[currentLanguage].col_mental, data: dataMent, backgroundColor:'#9b59b6'}
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          min: 0,
+          max: 20,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      },
+      plugins: {
+        legend: {position: 'top'},
+        tooltip: {enabled: true}
+      }
+    }
+  });
+
+  // نقاط القوة والضعف حسب المتوسط > أو < 13
+  const strengths = [];
+  const weaknesses = [];
+  const groupAverages = {
+    // Use i18n keys for better display in analysis results
+    [i18n[currentLanguage].col_technical]: avgTech,
+    [i18n[currentLanguage].col_physical]: avgPhys,
+    [i18n[currentLanguage].col_tactical]: avgTact,
+    [i18n[currentLanguage].col_mental]: avgMent
+  };
+
+  for(let key in groupAverages){
+    if(groupAverages[key] >= 13) strengths.push(`${key}: ${groupAverages[key].toFixed(1)}`);
+    else weaknesses.push(`${key}: ${groupAverages[key].toFixed(1)}`);
+  }
+
+  document.getElementById("team-strengths").textContent =
+    (strengths.length ? i18n[currentLanguage].team_strengths_title + " " + strengths.join(" | ") : i18n[currentLanguage]["no_strengths"]);
+
+  document.getElementById("team-weaknesses").textContent =
+    (weaknesses.length ? i18n[currentLanguage].team_weaknesses_title + " " + weaknesses.join(" | ") : i18n[currentLanguage]["no_weaknesses"]);
+}
+
+/* --------------------- اختيار الفلسفة التدريبية --------------------- */
+const philosophyButtons = document.querySelectorAll("#philosophy-options button");
+philosophyButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    philosophyButtons.forEach(b => {
+      b.setAttribute("aria-pressed", "false");
+      b.style.background = "white";
+      b.style.color = "var(--primary-color)"; // Use CSS variable
+    });
+    btn.setAttribute("aria-pressed", "true");
+    btn.style.background = "var(--primary-color)"; // Use CSS variable
+    btn.style.color = "var(--light-color)"; // Use CSS variable
+    currentPhilosophy = btn.dataset.philosophy;
+    translatePage(); // Update philosophy description
+  });
+});
+
+/* --------------------- جدولة التدريبات والمباريات --------------------- */
+const scheduleTable = document.getElementById("schedule-table");
+document.getElementById("btn-save-schedule").addEventListener("click", () => {
+  teamSchedule = {};
+  const rows = scheduleTable.tBodies[0].rows;
+  for(let row of rows) {
+    const day = row.dataset.day;
+    const trainingTime = row.querySelector(".training-time").value;
+    const matchTime = row.querySelector(".match-time").value;
+    teamSchedule[day] = {trainingTime, matchTime};
+  }
+  showAppMessage(i18n[currentLanguage]["schedule_saved"]);
+});
+
+// Event listener for removing schedule times (corrected functionality)
+scheduleTable.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btn-remove-schedule")) {
+    const row = e.target.closest("tr");
+    if (row) {
+      const day = row.dataset.day;
+      const confirmed = await showAppConfirm(`${i18n[currentLanguage].confirm_delete_player.replace('اللاعب', 'بيانات اليوم')} ${i18n[currentLanguage][`day_${day}`]}?`); // Re-purpose string for day data
+      if (confirmed) {
+        row.querySelector(".training-time").value = "";
+        row.querySelector(".match-time").value = "";
+        if (teamSchedule[day]) {
+          delete teamSchedule[day];
+        }
+        showAppMessage(i18n[currentLanguage]["day_data_cleared"]);
+      }
+    }
+  }
+});
+
+
+/* --------------------- إنشاء البرنامج التدريبي --------------------- */
+const programOutput = document.getElementById("program-output");
+const btnCreateAnnual = document.getElementById("btn-create-annual");
+const btnDownloadPDF = document.getElementById("btn-download-pdf");
+
+btnCreateAnnual.addEventListener("click", () => {
+  if (!currentPhilosophy) {
+    showAppMessage(i18n[currentLanguage]["select_philosophy_first"]);
+    return;
+  }
+  const months = 12;
+  let programText = `${i18n[currentLanguage].programs_title}\n\n`;
+  programText += `${i18n[currentLanguage].label_name}: ${currentCoach.name}\n`;
+  programText += `${i18n[currentLanguage].age_group_title}: ${i18n[currentLanguage][`age_${ageGroup}`]}\n`;
+  programText += `${i18n[currentLanguage].training_philosophy_title}: ${i18n[currentLanguage][`philosophy_${currentPhilosophy}`]}\n\n`;
+
+  for(let m=1; m<=months; m++){
+    programText += `${i18n[currentLanguage === 'ar' ? 'الشهر' : (currentLanguage === 'fr' ? 'Mois' : 'Month')]} ${m}\n`;
+    let primaryFocus = "";
+    let physicalFocus = "";
+
+    // Dynamic program text based on philosophy and language
+    if (currentPhilosophy === "offensive") {
+        primaryFocus = i18n[currentLanguage].philosophy_offensive + ": التركيز على الهجوم السريع والتسديدات.";
+        physicalFocus = i18n[currentLanguage].col_physical + ": تحسين السرعة والانفجارية.";
+    } else if (currentPhilosophy === "defensive") {
+        primaryFocus = i18n[currentLanguage].philosophy_defensive + ": بناء دفاع صلب ومنظم.";
+        physicalFocus = i18n[currentLanguage].col_physical + ": تعزيز القوة البدنية والتحمل.";
+    } else if (currentPhilosophy === "possession") {
+        primaryFocus = i18n[currentLanguage].philosophy_possession + ": تطوير التحكم بالكرة والتمرير الدقيق.";
+        physicalFocus = i18n[currentLanguage].col_physical + ": تحسين المرونة والتوازن.";
+    } else if (currentPhilosophy === "high-press") {
+        primaryFocus = i18n[currentLanguage].philosophy_high_press + ": التدريب على الضغط العالي واستعادة الكرة.";
+        physicalFocus = i18n[currentLanguage].col_physical + ": زيادة اللياقة البدنية والقدرة على الركض المتواصل.";
+    } else if (currentPhilosophy === "direct") {
+        primaryFocus = i18n[currentLanguage].philosophy_direct + ": التركيز على اللعب الطولي والهجمات المرتدة.";
+        physicalFocus = i18n[currentLanguage].col_physical + ": تطوير السرعة والقوة في الالتحامات.";
+    }
+
+    programText += ` - ${i18n[currentLanguage].programs_title.split(' ')[0]} ${primaryFocus}\n`; // "Training: Focus on..."
+    if (players.length > 0) {
+      programText += ` - ${physicalFocus}\n\n`;
+    }
+  }
+
+  programOutput.textContent = programText;
+});
+
+/* تصدير PDF */
+btnDownloadPDF.addEventListener("click", () => {
+  const { jsPDF } = window.jspdf;
+  let doc = new jsPDF({unit:'pt', format:'a4', compress:true});
+  let text = programOutput.textContent || "";
+
+  // Set font based on language for PDF (requires font embedding for Arabic)
+  if (currentLanguage === 'ar') {
+    // IMPORTANT: For Arabic characters to display correctly in PDF,
+    // you MUST embed a font that supports Arabic script.
+    // This typically involves:
+    // 1. Converting a .ttf font file (e.g., NotoSansArabic-Regular.ttf, Cairo-Regular.ttf) to a Base64 string.
+    //    There are online tools or build processes for this.
+    // 2. Adding the font to jsPDF's Virtual File System (VFS) and then registering it.
+    //    Example (conceptual, replace with actual Base64 font data):
+    //    doc.addFileToVFS("Cairo-Regular.ttf", "YOUR_BASE64_ENCODED_CAIRO_FONT_STRING_HERE");
+    //    doc.addFont("Cairo-Regular.ttf", "Cairo", "normal");
+    //    doc.setFont("Cairo");
+    //    doc.setR2L(true); // Enable Right-to-Left text for Arabic
+    //    doc.setFontSize(14); // Slightly larger font size for better Arabic readability
+    showAppMessage("تحميل PDF باللغة العربية يتطلب تضمين خط يدعم اللغة العربية في ملف jsPDF. قد لا تظهر الحروف بشكل صحيح.");
+    doc.setFont("helvetica", "normal"); // Default fallback if Arabic font is not embedded
+    doc.setFontSize(12);
+    doc.setR2L(false); // Disable RTL for default font
+  } else {
+    doc.setFont("helvetica", "normal"); // Standard font for Latin languages
+    doc.setFontSize(12);
+    doc.setR2L(false); // Ensure RTL is off for LTR languages
+  }
+
+  let splitText = doc.splitTextToSize(text, 540);
+  doc.text(splitText, 35, 40);
+  doc.save(`training_program_${currentCoach ? currentCoach.name : "coach"}_${currentLanguage}.pdf`);
+});
+
+/* --------------------- تهيئة التطبيق وتشغيل الدخول الافتراضي --------------------- */
+function initApp(){
+  currentCoach = defaultCoach;
+  players = JSON.parse(JSON.stringify(defaultPlayers));
+
+  populateCoachProfile();
+  renderPlayersTable(); // Ensures initial player table is rendered and charts are updated
+  updateTeamAnalysisCharts();
+
+  showSection("dashboard");
+  // The showSection("dashboard") now handles the initial philosophy button click
+}
+
+// تشغيل التطبيق عند التحميل
+window.addEventListener("DOMContentLoaded", initApp);
