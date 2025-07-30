@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة تدريب كرة القدم</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <i class="fas fa-futbol"></i>
+            <p>جاري تحميل نظام إدارة كرة القدم...</p>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-message"></span>
+        <button id="notification-close" class="btn-icon"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav id="main-nav" class="main-nav hidden">
+        <div class="nav-container">
+            <a href="#" class="nav-brand" data-view="home">
+                <i class="fas fa-futbol"></i>
+                <span>إدارة كرة القدم</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" data-view="dashboard"><i class="fas fa-tachometer-alt"></i> لوحة القيادة</a></li>
+                <li><a href="#" data-view="coach-profile"><i class="fas fa-user-tie"></i> ملف المدرب</a></li>
+                <li><a href="#" data-view="categories"><i class="fas fa-users-cog"></i> الفئات العمرية</a></li>
+                <li><a href="#" data-view="players"><i class="fas fa-users"></i> اللاعبون</a></li>
+                <li><a href="#" data-view="calendar"><i class="fas fa-calendar-alt"></i> التقويم</a></li>
+                <li><a href="#" data-view="analysis"><i class="fas fa-chart-line"></i> التحليل</a></li>
+                <li><a href="#" data-view="training-plans"><i class="fas fa-clipboard-list"></i> خطط التدريب</a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Home View -->
+        <section id="home-view" class="view active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>نظام إدارة تدريب كرة القدم الخاص بك</h1>
+                    <p>أدِر فريقك، خطط للتدريبات، وحلل الأداء، كل ذلك في مكان واحد.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+                        <button class="btn btn-secondary" id="register-btn"><i class="fas fa-user-plus"></i> التسجيل</button>
+                        <!-- Demo Data Load Button -->
+                        <button class="btn btn-secondary" id="load-demo-data-btn"><i class="fas fa-database"></i> تحميل بيانات العرض التوضيحي</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-football-ball"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login View -->
+        <section id="login-view" class="view">
+            <div class="auth-container">
+                <form id="login-form" class="auth-form">
+                    <h2><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</h2>
+                    <div class="form-group">
+                        <label for="login-email">البريد الإلكتروني</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">كلمة المرور</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
+                    <p class="auth-switch">ليس لديك حساب؟ <a href="#" id="switch-to-register">التسجيل الآن</a></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Register View -->
+        <section id="register-view" class="view">
+            <div class="auth-container">
+                <form id="register-form" class="auth-form">
+                    <h2><i class="fas fa-user-plus"></i> التسجيل</h2>
+                    <div class="form-group">
+                        <label for="register-name">الاسم</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">البريد الإلكتروني</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">كلمة المرور</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">التسجيل</button>
+                    <p class="auth-switch">لديك حساب بالفعل؟ <a href="#" id="switch-to-login">تسجيل الدخول</a></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard View -->
+        <section id="dashboard-view" class="view">
+            <div class="dashboard-container">
+                <h1>لوحة القيادة</h1>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3><span id="total-players">0</span></h3>
+                            <p>إجمالي اللاعبين</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-dumbbell"></i>
+                        <div class="stat-info">
+                            <h3><span id="total-trainings">0</span></h3>
+                            <p>إجمالي التدريبات</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <div class="stat-info">
+                            <h3><span id="total-matches">0</span></h3>
+                            <p>إجمالي المباريات</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <div class="stat-info">
+                            <h3><span id="team-average">0</span></h3>
+                            <p>متوسط الفريق</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>توزيع مهارات الفريق</h3>
+                        <canvas id="team-skills-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>الأحداث القادمة</h3>
+                        <div id="upcoming-events" class="events-list">
+                            <p>لا توجد أحداث قادمة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coach Profile View -->
+        <section id="coach-profile-view" class="view">
+            <div class="profile-container">
+                <h1>ملف المدرب</h1>
+                <form id="coach-profile-form" class="profile-form">
+                    <div class="form-group">
+                        <label for="coach-name">الاسم الكامل</label>
+                        <input type="text" id="coach-name" value="مدرب تجريبي" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="coach-age">العمر</label>
+                            <input type="number" id="coach-age" value="35" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="coach-nationality">الجنسية</label>
+                            <input type="text" id="coach-nationality" value="جزائري" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="coach-phone">رقم الهاتف</label>
+                        <input type="tel" id="coach-phone" value="+213555123456">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="coach-continent">القارة المفضلة</label>
+                            <select id="coach-continent">
+                                <option value="africa">أفريقيا</option>
+                                <option value="europe">أوروبا</option>
+                                <option value="asia">آسيا</option>
+                                <option value="america">الأمريكتين</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coach-license">رخصة التدريب</label>
+                            <select id="coach-license">
+                                <option value="c">رخصة C</option>
+                                <option value="b">رخصة B</option>
+                                <option value="a">رخصة A</option>
+                                <option value="pro">رخصة Pro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="coach-style">أسلوب اللعب المفضل</label>
+                        <select id="coach-style">
+                            <option value="possession">الاستحواذ</option>
+                            <option value="counter-attack">الهجمات المرتدة</option>
+                            <option value="pressing">الضغط العالي</option>
+                            <option value="defensive">الدفاعي</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-save"></i> حفظ الملف الشخصي</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Categories View -->
+        <section id="categories-view" class="view">
+            <div class="category-container">
+                <h1>اختر الفئة العمرية</h1>
+                <div class="category-grid">
+                    <div class="category-card" data-category="U15">
+                        <i class="fas fa-child"></i>
+                        <h3>أقل من 15 سنة (U15)</h3>
+                        <p>تطوير المهارات الأساسية والفهم التكتيكي المبكر.</p>
+                        <ul>
+                            <li>التركيز على الأساسيات</li>
+                            <li>تطوير التنسيق</li>
+                            <li>المتعة والتعلم</li>
+                        </ul>
+                    </div>
+                    <div class="category-card" data-category="U17">
+                        <i class="fas fa-male"></i>
+                        <h3>أقل من 17 سنة (U17)</h3>
+                        <p>صقل المهارات الفردية والجماعية، وبناء اللياقة البدنية.</p>
+                        <ul>
+                            <li>تكتيكات متقدمة</li>
+                            <li>تحسين اللياقة</li>
+                            <li>العمل الجماعي</li>
+                        </ul>
+                    </div>
+                    <div class="category-card" data-category="U19">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3>أقل من 19 سنة (U19)</h3>
+                        <p>التحضير للمستوى الاحترافي، وتطوير الجانب الذهني.</p>
+                        <ul>
+                            <li>الاحترافية</li>
+                            <li>التحمل البدني</li>
+                            <li>القيادة</li>
+                        </ul>
+                    </div>
+                    <div class="category-card" data-category="female">
+                        <i class="fas fa-female"></i>
+                        <h3>فريق السيدات</h3>
+                        <p>برامج تدريبية مخصصة لتطوير كرة القدم النسائية.</p>
+                        <ul>
+                            <li>تطوير شامل</li>
+                            <li>بناء الفريق</li>
+                            <li>الاستراتيجيات</li>
+                        </ul>
+                    </div>
+                    <div class="category-card" data-category="senior">
+                        <i class="fas fa-user-check"></i>
+                        <h3>فريق الكبار</h3>
+                        <p>تحسين الأداء التنافسي، والاستعداد للمباريات.</p>
+                        <ul>
+                            <li>أداء عالي</li>
+                            <li>تكتيكات متقدمة</li>
+                            <li>الخبرة</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="category-selection" class="category-selection hidden">
+                    <p>الفئة المختارة: <strong id="selected-category"></strong></p>
+                    <button class="btn btn-primary" id="confirm-category"><i class="fas fa-check-circle"></i> تأكيد الاختيار</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Players View -->
+        <section id="players-view" class="view">
+            <div class="players-container">
+                <div class="players-header">
+                    <h1>إدارة اللاعبين</h1>
+                    <button class="btn btn-primary" id="add-player-btn"><i class="fas fa-user-plus"></i> إضافة لاعب جديد</button>
+                </div>
+                <div class="players-filters">
+                    <input type="text" id="player-search" placeholder="ابحث عن لاعب...">
+                    <select id="position-filter">
+                        <option value="">جميع المراكز</option>
+                        <option value="GK">حارس مرمى</option>
+                        <option value="DEF">مدافع</option>
+                        <option value="MID">خط وسط</option>
+                        <option value="ATT">مهاجم</option>
+                    </select>
+                </div>
+                <div id="players-grid" class="players-grid">
+                    <!-- Player cards will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendar View -->
+        <section id="calendar-view" class="view">
+            <div class="calendar-container">
+                <h1>تقويم التدريب</h1>
+                <div class="calendar-controls">
+                    <button class="btn btn-secondary" id="prev-week"><i class="fas fa-chevron-left"></i> الأسبوع السابق</button>
+                    <h2 id="current-week"></h2>
+                    <button class="btn btn-secondary" id="next-week">الأسبوع التالي <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn btn-primary" id="add-event-btn"><i class="fas fa-plus-circle"></i> إضافة حدث</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-header">
+                        <div>الوقت</div>
+                        <div>الاثنين</div>
+                        <div>الثلاثاء</div>
+                        <div>الأربعاء</div>
+                        <div>الخميس</div>
+                        <div>الجمعة</div>
+                        <div>السبت</div>
+                        <div>الأحد</div>
+                    </div>
+                    <div id="calendar-body" class="calendar-body">
+                        <!-- Calendar slots and events will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis View -->
+        <section id="analysis-view" class="view">
+            <div class="analysis-container">
+                <h1>تحليل أداء الفريق</h1>
+                <div class="analysis-tabs">
+                    <button class="tab-btn active" data-tab="team">تحليل الفريق</button>
+                    <button class="tab-btn" data-tab="player">تحليل اللاعبين</button>
+                    <button class="tab-btn" data-tab="suggestions">الاقتراحات</button>
+                </div>
+
+                <div id="team-analysis" class="tab-content active">
+                    <div class="team-stats">
+                        <h3>متوسط مهارات الفريق</h3>
+                        <div class="avg-stats">
+                            <div class="avg-stat">
+                                <span class="stat-label">تقنية</span>
+                                <span class="stat-value" id="team-technical-avg">0</span>
+                            </div>
+                            <div class="avg-stat">
+                                <span class="stat-label">بدنية</span>
+                                <span class="stat-value" id="team-physical-avg">0</span>
+                            </div>
+                            <div class="avg-stat">
+                                <span class="stat-label">تكتيكية</span>
+                                <span class="stat-value" id="team-tactical-avg">0</span>
+                            </div>
+                            <div class="avg-stat">
+                                <span class="stat-label">ذهنية</span>
+                                <span class="stat-value" id="team-mental-avg">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-charts charts-container">
+                        <div class="chart-wrapper">
+                            <h3>توزيع المهارات</h3>
+                            <canvas id="team-distribution-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>ملف أداء الفريق</h3>
+                            <canvas id="team-radar-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="player-analysis" class="tab-content">
+                    <div class="player-selector">
+                        <label for="analysis-player-select">اختر لاعباً للتحليل:</label>
+                        <select id="analysis-player-select"></select>
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart-wrapper">
+                            <h3>المهارات التقنية</h3>
+                            <canvas id="technical-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>القدرات البدنية</h3>
+                            <canvas id="physical-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>الذكاء التكتيكي</h3>
+                            <canvas id="tactical-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>الجانب الذهني</h3>
+                            <canvas id="mental-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="suggestions-analysis" class="tab-content">
+                    <div class="suggestions-container">
+                        <h3>اقتراحات لتحسين الفريق</h3>
+                        <div id="team-suggestions" class="suggestions-list">
+                            <!-- Suggestions will be generated here -->
+                        </div>
+                        <div class="recommended-style">
+                            <h3>أسلوب اللعب الموصى به</h3>
+                            <div id="recommended-style">
+                                <!-- Recommended style will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Plans View -->
+        <section id="training-plans-view" class="view">
+            <div class="training-plans-container">
+                <h1>خطط التدريب</h1>
+                <div class="plan-type-selector">
+                    <label for="plan-type">اختر نوع الخطة:</label>
+                    <select id="plan-type">
+                        <option value="weekly">خطة أسبوعية</option>
+                        <option value="monthly">خطة شهرية</option>
+                        <option value="physical">خطة إعداد بدني</option>
+                    </select>
+                </div>
+                <div class="plans-controls">
+                    <button class="btn btn-primary" id="generate-plan-btn"><i class="fas fa-cogs"></i> إنشاء خطة</button>
+                    <button class="btn btn-secondary" id="create-custom-plan-btn"><i class="fas fa-pencil-alt"></i> إنشاء خطة مخصصة</button>
+                    <button class="btn btn-success" id="export-pdf-btn"><i class="fas fa-file-pdf"></i> تصدير PDF</button>
+                    <button class="btn btn-info" id="save-plan-btn"><i class="fas fa-save"></i> حفظ الخطة</button>
+                </div>
+                <div id="training-plan-content" class="plan-content">
+                    <p class="text-center">اختر نوع الخطة وانقر على "إنشاء خطة" لعرضها هنا.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Event Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة حدث جديد</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="event-form">
+                <div class="form-group">
+                    <label for="event-title">عنوان الحدث</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-type">نوع الحدث</label>
+                    <select id="event-type">
+                        <option value="training">تدريب</option>
+                        <option value="match">مباراة</option>
+                        <option value="meeting">اجتماع</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-date">التاريخ</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">الوقت</label>
+                        <input type="time" id="event-time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="event-duration">المدة (بالدقائق)</label>
+                    <input type="number" id="event-duration" value="90" min="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">الوصف</label>
+                    <textarea id="event-description" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-event">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ الحدث</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Player Modal -->
+    <div id="player-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="player-modal-title">إضافة لاعب جديد</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="player-form">
+                <div class="player-form-tabs">
+                    <button type="button" class="tab-btn active" data-tab="general">معلومات عامة</button>
+                    <button type="button" class="tab-btn" data-tab="skills">المهارات</button>
+                </div>
+
+                <div id="general-info" class="tab-content active">
+                    <div class="form-group">
+                        <label for="player-name">اسم اللاعب</label>
+                        <input type="text" id="player-name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="player-age">العمر</label>
+                            <input type="number" id="player-age" min="6" max="40" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="player-number">رقم القميص</label>
+                            <input type="number" id="player-number" min="1" max="99" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="player-position">المركز</label>
+                        <select id="player-position" required>
+                            <option value="">اختر مركزاً</option>
+                            <option value="GK">حارس مرمى</option>
+                            <option value="DEF">مدافع</option>
+                            <option value="MID">خط وسط</option>
+                            <option value="ATT">مهاجم</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="skills-info" class="tab-content">
+                    <div class="skills-section">
+                        <h4>المهارات التقنية</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <label for="skill-passing">التمرير</label>
+                                <input type="range" id="skill-passing" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-receiving">الاستقبال</label>
+                                <input type="range" id="skill-receiving" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-dribbling">المراوغة</label>
+                                <input type="range" id="skill-dribbling" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-shooting">التسديد</label>
+                                <input type="range" id="skill-shooting" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-heading">الضرب بالرأس</label>
+                                <input type="range" id="skill-heading" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-ball-control">التحكم بالكرة</label>
+                                <input type="range" id="skill-ball-control" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h4>القدرات البدنية</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <label for="skill-endurance">التحمل البدني</label>
+                                <input type="range" id="skill-endurance" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-fitness">اللياقة البدنية</label>
+                                <input type="range" id="skill-fitness" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-speed">السرعة</label>
+                                <input type="range" id="skill-speed" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-strength">القوة البدنية</label>
+                                <input type="range" id="skill-strength" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-agility">التوازن والرشاقة</label>
+                                <input type="range" id="skill-agility" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h4>الذكاء التكتيكي</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <label for="skill-positioning">التمركز الصحيح</label>
+                                <input type="range" id="skill-positioning" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-game-reading">قراءة اللعب</label>
+                                <input type="range" id="skill-game-reading" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-decision-making">الذكاء بالكرة أو بدونها</label>
+                                <input type="range" id="skill-decision-making" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                            <div class="skill-item">
+                                <label for="skill-teamwork">التنظيم والضغط الجماعي</label>
+                                <input type="range" id="skill-teamwork" min="1" max="20" value="10">
+                                <span class="skill-value">10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h4>الجانب الذهني</h4>
+                        <div class="skill-item">
+                            <label for="skill-concentration">التركيز</label>
+                            <input type="range" id="skill-concentration" min="1" max="20" value="10">
+                            <span class="skill-value">10</span>
+                        </div>
+                        <div class="skill-item">
+                            <label for="skill-confidence">الثقة بالنفس</label>
+                            <input type="range" id="skill-confidence" min="1" max="20" value="10">
+                            <span class="skill-value">10</span>
+                        </div>
+                        <div class="skill-item">
+                            <label for="skill-leadership">القيادة</label>
+                            <input type="range" id="skill-leadership" min="1" max="20" value="10">
+                            <span class="skill-value">10</span>
+                        </div>
+                        <div class="skill-item">
+                            <label for="skill-motivation">الحافز والرغبة في الفوز</label>
+                            <input type="range" id="skill-motivation" min="1" max="20" value="10">
+                            <span class="skill-value">10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-player">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ اللاعب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/demo_data_loader.js"></script>
+    <script src="js/load_all_demo_data.js"></script>
+</body>
+</html>
